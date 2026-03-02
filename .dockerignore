@@ -1,7 +1,29 @@
+# 1. Version Control
+.git
+.gitignore
+
+# 2. Virtual Environments (Huge files that should stay on host)
 venv/
-__pycache__/
+.venv/
+env/
+
+# 3. Python Cache & Compiled Files
+**/__pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+# 4. Testing & Coverage
+tests/
 .pytest_cache/
-.git/
-.env
-*.md
+.coverage
+htmlcov/
+
+# 5. Local IDE Settings
+.vscode/
+.idea/
+
+# 6. Documentation & Metadata
+README.md
+LICENSE
+docs/

@@ -21,7 +21,7 @@ This service is architected to be highly fault-tolerant and is specifically opti
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/yourusername/case-classify-oracle.git](https://github.com/yourusername/case-classify-oracle.git)
+    git clone [https://github.com/chrisconcepcion/CaseClassify-Oracle-AI-Inference-Microservice](https://github.com/chrisconcepcion/CaseClassify-Oracle-AI-Inference-Microservice)
     cd case-classify-oracle
     ```
 
