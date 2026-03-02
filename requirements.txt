@@ -1,0 +1,15 @@
+# --- Infrastructure: GPU-Optimized for Blackwell (50-series) ---
+# We use extra-index so pip can still find web packages on PyPI
+--extra-index-url https://download.pytorch.org/whl/cu128
+torch
+torchvision
+torchaudio
+
+# --- API Framework: High-performance & Schema Validation ---
+fastapi==0.109.0
+uvicorn==0.27.0
+pydantic==2.6.0
+
+# --- AI Logic: Transformer Architectures ---
+transformers==4.37.0
+

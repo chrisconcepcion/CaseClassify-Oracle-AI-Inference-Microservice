@@ -1,33 +1,67 @@
-CaseClassify-Oracle: AI Inference Microservice
+# CaseClassify Oracle
 
-Overview
+## Overview
+CaseClassify Oracle is a high-performance Python microservice designed to decouple AI inference from a primary Ruby on Rails monolith. It accepts unstructured legal text (e.g., case descriptions, support tickets) and performs real-time classification to determine urgency and risk levels.
 
-This repository contains a high-performance Python microservice designed to act as a RealTime Oracle for the OpenCaseWare ecosystem. OpenCaseWare is a metadata-driven B2B SaaS platform serving over 50 government and enterprise clients, including the NFTA and Mattel.
+This service is architected to be highly fault-tolerant and is specifically optimized for NVIDIA Blackwell (RTX 50-series) GPUs using CUDA 12.8+ drivers.
 
-As the Lead Architect, I designed this service to solve specific "sore spots" identified through Support Ticket analysis:
+## Architecture
+* **Framework:** FastAPI (Asynchronous Server Gateway Interface) for handling high-concurrency requests.
+* **Inference Engine:** PyTorch with Hugging Face Transformers.
+* **Model:** DistilBERT (fine-tuned) for low-latency text classification.
+* **Validation:** Pydantic v2 for strict API contract enforcement and schema validation.
+* **Infrastructure:** Dockerized with the NVIDIA Container Toolkit for production deployment.
 
-    Decoupled Intelligence: By isolating the Transformer-based inference from the Ruby on Rails monolith, we prevent ML memory spikes from impacting core web availability.
+## Prerequisites
+* Python 3.11+
+* NVIDIA Drivers (550.x or higher recommended for Blackwell architecture)
+* Docker & NVIDIA Container Toolkit (for containerized deployment)
 
-    Highly Fault Tolerant: Implements a strict API Contract via Pydantic to ensure data integrity across the distributed system.
+## Local Installation
 
-    Hardware Optimized: Configured for NVIDIA Blackwell (RTX 50-series) architecture using CUDA 12.8 to minimize inference latency for real-time legal document processing.
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/yourusername/case-classify-oracle.git](https://github.com/yourusername/case-classify-oracle.git)
+    cd case-classify-oracle
+    ```
 
-AI Capabilities
+2.  **Create a virtual environment:**
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate  # On Windows: venv\Scripts\activate
+    ```
 
-    Transformer Implementation: Utilizes a distilled BERT architecture for low-latency text classification.
+3.  **Install dependencies:**
+    This project uses a specific PyTorch build optimized for CUDA 12.4+ (compatible with Blackwell).
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-    Feature Engineering: Includes a pandas and scikit-learn pipeline to transform recursive SCTL (Single Case Type Linkage) metadata into flat feature vectors for risk prediction.
+4.  **Run the application:**
+    ```bash
+    uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+    ```
 
-    Pre-processing: Automated entity extraction from Case Datum attachments to reduce manual data entry for government clerks.
+## Docker Deployment (Production)
 
-Tech Stack
+The Dockerfile is optimized to use the official NVIDIA CUDA 12.8 base image.
 
-    Language: Python 3.11+ 
+1.  **Build the container:**
+    ```bash
+    docker build -t oracle:v1 .
+    ```
 
-    Framework: FastAPI (Asynchronous API) 
+2.  **Run with GPU support:**
+    Ensure the NVIDIA Container Toolkit is installed on the host machine.
+    ```bash
+    docker run --gpus all -p 8000:8000 oracle:v1
+    ```
 
-    ML Engine: PyTorch (CUDA 12.8 Optimized) 
+## API Usage
 
-    Models: Hugging Face Transformers 
+### Health Check
+Verifies the service status and GPU visibility.
 
-    Infrastructure: Docker, Redis (Task Queuing)# CaseClassify-Oracle-AI-Inference-Microservice
+**Request:**
+```bash
+curl -X GET http://localhost:8000/health
