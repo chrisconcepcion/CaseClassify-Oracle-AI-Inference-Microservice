@@ -21,8 +21,8 @@ This service is architected to be highly fault-tolerant and is specifically opti
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/chrisconcepcion/CaseClassify-Oracle-AI-Inference-Microservice](https://github.com/chrisconcepcion/CaseClassify-Oracle-AI-Inference-Microservice)
-    cd case-classify-oracle
+    git clone https://github.com/chrisconcepcion/CaseClassify-Oracle-AI-Inference-Microservice.git
+    cd CaseClassify-Oracle-AI-Inference-Microservice
     ```
 
 2.  **Create a virtual environment:**
