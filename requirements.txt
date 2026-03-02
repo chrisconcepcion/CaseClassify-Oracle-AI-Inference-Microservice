@@ -13,3 +13,16 @@ pydantic==2.6.0
 # --- AI Logic: Transformer Architectures ---
 transformers==4.37.0
 
+# --- Data Engineering & Refinery --
+pandas==2.2.0
+numpy==1.26.4
+scikit-learn==1.4.1.post1
+
+# --- Distributed Task Queue ---
+celery==5.3.6
+redis==5.0.1
+
+# --- Testing & Quality ---
+pytest==8.0.0
+pytest-asyncio==0.23.5
+

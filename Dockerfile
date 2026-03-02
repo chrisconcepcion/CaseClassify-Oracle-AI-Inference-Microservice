@@ -38,3 +38,10 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 
 # Start Uvicorn server
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+# Start script to decide which process to run
+# Usage: docker run -e ROLE=worker oracle:v1
+CMD if [ "$ROLE" = "worker" ]; \
+    then celery -A app.worker.celery_app worker --loglevel=info; \
+    else uvicorn app.main:app --host 0.0.0.0 --port 8000; \
+    fi
