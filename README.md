@@ -65,3 +65,13 @@ Verifies the service status and GPU visibility.
 **Request:**
 ```bash
 curl -X GET http://localhost:8000/health
+
+
+### Example Prediction
+
+curl -X POST http://localhost:8000/predict \
+  -H "Content-Type: application/json" \
+  -d '{
+    "case_id": "case-505",
+    "description": "The client is alleging a breach of contract and is threatening immediate litigation."
+  }'
